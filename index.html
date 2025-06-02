@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web Inclusiva 2025</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+  <section id="busqueda">
+  <h3>🔎 Buscar recursos</h3>
+  <input type="text" id="barraBusqueda" placeholder="Escribe aquí..." onkeyup="buscarRecursos()" style="width: 100%; padding: 0.5em; font-size: 1em;" />
+  <button onclick="limpiarBusqueda()" style="margin-top: 0.5em;">❌ Limpiar búsqueda</button>
+  </section>
+
+
+<body>
+  <header>
+    <h1>Acceso para Todos</h1>
+    <button onclick="leerContenido()">🔊 Leer Página</button>
+  </header>
+
+  <main>
+    <section>
+      <h2>Bienvenidos</h2>
+      <p>Esta página facilita el acceso al aprendizaje y contenido digital para personas con discapacidad.</p>
+    </section>
+
+    <section>
+  <h2>Recursos</h2>
+  <ul>
+
+   <li>
+  <button onclick="mostrarContenido('audio')">🎧 Material en audio</button>
+  <div id="audio" class="recurso-oculto">
+ <p>Sube tu propio material en audio:</p>
+ <input type="file" accept=".mp3" onchange="reproducirAudio(this)" />
+
+ <p id="nombreArchivoAudio" style="font-style: italic;"></p>
+
+ <audio id="reproductor" controls class="recurso-oculto"></audio>
+<br />
+  <button onclick="detenerAudio()">⏹️ Detener audio</button>
+  <button onclick="transcribirAudio()">📝 Transcribir</button>
+
+  <div id="transcripcion" style="margin-top: 1em; background: #f9f9f9; padding: 1em; border: 1px solid #ccc;">
+  <button onclick="descargarTranscripcion()">📤 Descargar transcripción</button>
+  <h4>🗒️ Transcripción:</h4>
+  <p id="textoTranscrito">[Esperando transcripción...]</p>
+</div>
+
+    <p>Accede a audios educativos grabados para facilitar el aprendizaje auditivo.</p>
+    
+    <p>Sube tu propio material en audio:</p>
+    <input type="file" accept=".mp3" onchange="reproducirAudio(this)" />
+
+    <p id="nombreArchivoAudio" style="font-style: italic;"></p>
+    
+    <audio id="reproductor" controls class="recurso-oculto"></audio>
+    <h4>🗂 Historial de archivos cargados:</h4>
+<ul id="historialAudio" aria-live="polite"></ul>
+  <button onclick="exportarHistorial('historialAudio', 'historial_audio')">📤 Exportar historial de audio</button>
+
+  <button onclick="limpiarHistorial('historialAudio')">🗑️ Limpiar historial de audio</button>
+  <hr />
+<h3>📦 Exportar todos los historiales</h3>
+  <button onclick="exportarTodosLosHistoriales()">📤 Descargar historial completo</button>
+
+    <br />
+    <button onclick="detenerAudio()">⏹️ Detener audio</button>
+  </div>
+</li>
+
+<li>
+  <button onclick="mostrarContenido('video')">🎥 Video educativo</button>
+  <div id="video" class="recurso-oculto">
+    <p>Sube un archivo de video educativo:</p>
+    <input type="file" accept=".mp4" onchange="reproducirVideo(this)" />
+
+    <p id="nombreArchivoVideo" style="font-style: italic;"></p>
+
+    <video id="reproductorVideo" controls class="recurso-oculto" width="100%" height="auto"></video>
+    <h4>🗂 Historial de archivos cargados:</h4>
+<ul id="historialVideo" aria-live="polite"></ul>
+  <button onclick="exportarHistorial('historialVideo', 'historial_video')">📤 Exportar historial de video</button>
+
+  <button onclick="limpiarHistorial('historialVideo')">🗑️ Limpiar historial de video</button>
+ 
+    <br />
+    <button onclick="detenerVideo()">⏹️ Detener video</button>
+  </div>
+</li>
+
+<li>
+  <button onclick="mostrarContenido('pdf')">📄 Ver documento PDF</button>
+  <div id="pdf" class="recurso-oculto">
+    <p>Sube un archivo PDF para leerlo directamente aquí:</p>
+    <input type="file" accept=".pdf" onchange="mostrarPDF(this)" />
+
+    <p id="nombreArchivoPDF" style="font-style: italic;"></p>
+
+    <iframe id="visorPDF" class="recurso-oculto" width="100%" height="500px"></iframe>
+    <h4>🗂 Historial de archivos cargados:</h4>
+    <ul id="historialPDF" aria-live="polite"></ul>
+  <button onclick="exportarHistorial('historialPDF', 'historial_pdf')">📤 Exportar historial de PDF</button>
+
+  <button onclick="limpiarHistorial('historialPDF')">🗑️ Limpiar historial de PDF</button>
+ 
+  </div>
+</li>
+
+
+
+
+<li>
+  <button onclick="mostrarContenido('cursos')">📚 Cursos inclusivos</button>
+  <div id="cursos" class="recurso-oculto">
+    <p>Explora cursos diseñados con lenguaje sencillo, subtítulos y ayudas visuales.</p>
+
+    <label>Sube un archivo de curso (solo PDF se mostrará):</label>
+    <input type="file" accept=".pdf,.docx" onchange="mostrarCurso(this)" />
+
+    <p id="nombreArchivoCurso" style="font-style: italic;"></p>
+
+    <iframe id="visorCursoPDF" class="recurso-oculto" width="100%" height="500px"></iframe>
+    <h4>🗂 Historial de archivos cargados:</h4>
+    <ul id="historialCursos" aria-live="polite"></ul>
+   <button onclick="exportarHistorial('historialCursos', 'historial_cursos')">📤 Exportar historial de cursos</button>
+
+   <button onclick="limpiarHistorial('historialCursos')">🗑️ Limpiar historial de cursos</button>
+   
+  </div>
+</li>
+
+   
+
+   <li>
+  <button onclick="mostrarContenido('herramientas')">🧩 Herramientas adaptativas</button>
+  <div id="herramientas" class="recurso-oculto">
+    <p>Utiliza herramientas como lupa digital, lector de pantalla y teclado en pantalla.</p>
+
+    <label>Sube un documento de herramienta:</label>
+    <input type="file" accept=".pdf,.docx,.zip,.exe,.bat,.msi" onchange="verificarHerramienta(this)" />
+
+    <p id="nombreArchivoHerramienta" style="font-style: italic;"></p>
+
+    <iframe id="visorHerramienta" class="recurso-oculto" width="100%" height="500px"></iframe>
+
+    <a id="descargarHerramienta" class="recurso-oculto" download>
+      <button>⬇️ Descargar herramienta</button>
+
+<h4>🗂 Historial de archivos cargados:</h4>
+<ul id="historialHerramientas" aria-live="polite"></ul>
+   <button onclick="exportarHistorial('historialHerramientas', 'historial_herramientas')">📤 Exportar historial de herramientas</button>
+
+   <button onclick="limpiarHistorial('historialHerramientas')">🗑️ Limpiar historial de herramientas</button>
+   
+    </a>
+  </div>
+</li>
+
+<!-- MODAL DE ADVERTENCIA -->
+<div id="modalAdvertencia" class="recurso-oculto" style="position: fixed; top: 30%; left: 10%; right: 10%; background: white; border: 2px solid red; padding: 20px; z-index: 1000; text-align: center;">
+  <p style="color: red; font-weight: bold;">🚫 Este tipo de archivo está bloqueado por razones de seguridad.</p>
+  <p>No puedes subir archivos ejecutables como .exe, .bat o .msi.</p>
+  <button onclick="cerrarModal()">Entendido</button>
+</div>
+
+
+
+  </ul>
+</section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 Web Inclusiva - Chepén</p>
+  </footer>
+  <input type="file" accept=".mp3,.pdf" onchange="mostrarContenido('audio')" />
+  ...
+  <input type="file" accept=".pdf,.docx" onchange="mostrarContenido('cursos')" />
+  ...
+  <input type="file" accept=".zip,.exe,.pdf" onchange="mostrarContenido('herramientas')" />
+
+	<button onclick="activarContraste()">🌓 Alto 	Contraste</button>
+	<button onclick="aumentarTexto()">A+</button>
+	<button onclick="disminuirTexto()">A-</button>
+  <script src="script.js"></script>
+</body>
+<button onclick="toggleAsistente()" id="btnAsistente">🤖 Abrir Asistente</button>
+<div id="asistenteVirtual" class="recurso-oculto">
+  <h3>Asistente Virtual</h3>
+  <div id="conversacion" style="height: 200px; overflow-y: auto; background: #eef; padding: 10px; margin-bottom: 10px;"></div>
+  <div id="preguntasRapidas">
+    <button onclick="responderDesdeBoton('recursos')">¿Qué recursos ofrece esta página?</button>
+    <button onclick="responderDesdeBoton('audio')">¿Cómo subir y reproducir un audio?</button>
+    <button onclick="responderDesdeBoton('pdf')">¿Cómo ver un documento PDF?</button>
+    <button onclick="responderDesdeBoton('cursos')">¿Cómo subir y ver un curso inclusivo?</button>
+    <button onclick="responderDesdeBoton('herramientas')">¿Qué son las herramientas adaptativas?</button>
+    <button onclick="responderDesdeBoton('pagina')">¿Para qué sirve esta página?</button>
+    <button onclick="responderDesdeBoton('buscador')">¿Para qué es el buscador?</button>
+    <button onclick="responderDesdeBoton('funciones')">¿Qué más funciones tiene?</button>
+  </div>
+  <button onclick="cerrarAsistente()">❌ Cerrar</button>
+</div>
+
+</html>
+ 
