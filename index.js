@@ -1,32 +1,36 @@
-const express = require("express");
-const multer = require("multer");
-const cors = require("cors");
-const { OpenAI } = require("openai");
-require("dotenv").config();
+const express = require('express');
+const multer = require('multer');
+const cors = require('cors');
+const fs = require('fs');
+const { exec } = require('child_process');
 
 const app = express();
-const upload = multer({ dest: "uploads/" });
+const port = process.env.PORT || 3000;
+
 app.use(cors());
+app.use(express.static('public')); // si tienes tu frontend aquí
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const upload = multer({ dest: 'uploads/' });
 
-app.post("/transcribir", upload.single("audio"), async (req, res) => {
-  try {
-    const transcription = await openai.audio.transcriptions.create({
-      file: req.file.path,
-      model: "whisper-1",
-      response_format: "text",
+app.post('/transcribe', upload.single('audio'), (req, res) => {
+  const audioPath = req.file.path;
+  const outputPath = `${audioPath}.txt`;
+
+  exec(`whisper ${audioPath} --language English --model base --output_format txt`, (err) => {
+    if (err) {
+      console.error('Error ejecutando whisper:', err);
+      return res.status(500).send('Error al transcribir el audio.');
+    }
+
+    fs.readFile(outputPath, 'utf8', (err, data) => {
+      if (err) {
+        return res.status(500).send('Error leyendo la transcripción.');
+      }
+      res.send({ text: data });
     });
-
-    res.send(transcription);
-  } catch (error) {
-    console.error("Error al transcribir:", error);
-    res.status(500).send("Error en la transcripción");
-  }
+  });
 });
 
-app.listen(3000, () => {
-  console.log("Servidor activo en http://localhost:3000");
+app.listen(port, () => {
+  console.log(`Servidor activo en http://localhost:${port}`);
 });
