@@ -334,7 +334,7 @@ async function transcribirAudio() {
   formData.append("audio", archivo);
 
   try {
-    const respuesta = await fetch("http://localhost:3000/transcribir", {
+    const respuesta = await fetch('https://webinclusiva2025-1.onrender.com/transcribe', {
       method: "POST",
       body: formData,
     });
