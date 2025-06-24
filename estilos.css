@@ -1,14 +1,14 @@
 body {
   font-size: 18px;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #f0f4f8; /* Fondo suave y moderno */
+  color: #333333; /* Color de texto más oscuro para mayor contraste */
   font-family: Arial, sans-serif;
   padding: 20px;
   line-height: 1.6;
 }
 
 button {
-  background-color: #005a87;
+  background-color: #FF7043; /* Naranja brillante para resaltar botones */
   color: white;
   padding: 10px;
   border: none;
@@ -16,49 +16,40 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: #FF5722; /* Naranja más oscuro al pasar el ratón */
+}
+
 .alto-contraste {
   background-color: #000000;
   color: #ffffff;
 }
+
 .alto-contraste a {
-  color: #00ffff;
+  color: #00ffff; /* Color brillante para resaltar enlaces */
 }
 
 .recurso-oculto {
   display: none;
   margin-top: 10px;
   padding: 10px;
-  background-color: #eef;
-  border-left: 4px solid #005a87;
+  background-color: #eef; /* Fondo suave para los recursos */
+  border-left: 4px solid #FF7043; /* Naranja vibrante para resaltar */
   border-radius: 4px;
 }
 
-.recurso-oculto {
-  display: none;
-}
 .recurso-visible {
   display: block;
   margin-top: 10px;
-}
-
-.recurso-oculto {
-  display: none;
-}
-.recurso-visible {
-  display: block;
-  margin-top: 10px;
-}
-
-.recurso-oculto {
-  display: none;
-}
-.recurso-visible {
-  display: block;
-  margin-top: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 2px solid #005a87;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 mark {
-  background-color: yellow;
+  background-color: #FFEB3B; /* Amarillo brillante para resaltar texto */
   color: black;
   font-weight: bold;
 }
@@ -68,6 +59,7 @@ li[tabindex="0"] {
   outline: 2px solid #0077cc;
   background-color: #e6f2ff;
 }
+
 #btnAsistente {
   position: fixed;
   bottom: 10px;
